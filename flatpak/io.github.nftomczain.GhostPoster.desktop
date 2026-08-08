@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=GhostPoster
+Name[pl]=GhostPoster
+Comment=Split large PDF plans into printable sheets
+Comment[pl]=Dzieli duże plany PDF na mniejsze arkusze do druku
+Exec=ghostposter-gui
+Icon=io.github.nftomczain.GhostPoster
+Categories=Graphics;Office;
+Terminal=false
+StartupNotify=true

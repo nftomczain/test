@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.nftomczain.GhostPoster</id>
+  <name>GhostPoster</name>
+  <summary>Split large PDF plans into printable sheets</summary>
+  <summary xml:lang="pl">Dzieli duże plany PDF na mniejsze arkusze do druku</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <developer id="io.github.nftomczain">
+    <name>nftomczain</name>
+  </developer>
+  <description>
+    <p>
+      GhostPoster splits large-format PDF plans (posters, model plans,
+      technical drawings) into smaller sheets — A4, A3, A2, Letter, ANSI,
+      ARCH and more — that print on a regular printer at exact 1:1 scale,
+      with a shared overlap tab so the printed sheets can be glued back
+      together.
+    </p>
+    <p xml:lang="pl">
+      GhostPoster dzieli duże plany PDF (plakaty, plany modelarskie,
+      rysunki techniczne) na mniejsze arkusze — A4, A3, A2, Letter, ANSI,
+      ARCH i inne — które drukują się na zwykłej drukarce w dokładnej
+      skali 1:1, ze wspólną zakładką do sklejenia wydrukowanych arkuszy.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Auto-detect content — skips blank page margins before splitting</li>
+      <li>Manual content-area selection when auto-detect struggles</li>
+      <li>Registration marks, cut lines, sheet numbering, a 100&#160;mm reference ruler</li>
+      <li>Auto-orientation to minimize the number of printed sheets</li>
+      <li>Print Shop mode — a "do not scale" stamp and a print job info sheet</li>
+      <li>Bilingual interface (English/Polish) with full keyboard accessibility</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.nftomczain.GhostPoster.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Live preview with the tile grid overlaid</caption>
+      <image>https://raw.githubusercontent.com/nftomczain/GhostPoster/main/docs/screenshots/gui_window.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/nftomczain/GhostPoster</url>
+  <url type="bugtracker">https://github.com/nftomczain/GhostPoster/issues</url>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="2.0.0" date="2026-08-05">
+      <description>
+        <p>Flatpak packaging, configurable sheet-numbering style, scrollable window on smaller screens.</p>
+        <p xml:lang="pl">Paczka Flatpak, konfigurowalny styl numeracji arkuszy, przewijane okno na mniejszych ekranach.</p>
+      </description>
+    </release>
+    <release version="1.0.0" date="2026-08-04">
+      <description>
+        <p>First stable release.</p>
+        <p xml:lang="pl">Pierwsze stabilne wydanie.</p>
+      </description>
+    </release>
+  </releases>
+</component>
