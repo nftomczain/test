@@ -50,7 +50,7 @@ modules:
       - install -Dm644 flatpak/io.github.nftomczain.GhostPoster.metainfo.xml
         /app/share/metainfo/io.github.nftomczain.GhostPoster.metainfo.xml
       - install -Dm644 docs/logo.png
-modules:
+
 
   - pip-dependencies.yaml
 
