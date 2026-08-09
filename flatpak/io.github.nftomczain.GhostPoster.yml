@@ -1,8 +1,5 @@
 app-id: io.github.nftomczain.GhostPoster
-# Wersja runtime'u KDE/PySide BaseApp — do utrzymania w czasie: sprawdź
-# aktualne wspierane gałęzie w https://github.com/flathub/io.qt.PySide.BaseApp
-# (branch README) i zsynchronizuj z tagiem obrazu w .github/workflows/ci.yml
-# (job build-linux-flatpak, `container: image:`).
+
 runtime: org.kde.Platform
 runtime-version: "6.8"
 sdk: org.kde.Sdk
@@ -10,9 +7,6 @@ base: io.qt.PySide.BaseApp
 base-version: "6.8"
 command: ghostposter-gui
 
-# BASEAPP_REMOVE_WEBENGINE / BASEAPP_DISABLE_NUMPY: GhostPoster nie
-# potrzebuje ani QtWebEngine, ani numpy — wyłączenie ich w bazowym obrazie
-# znacząco zmniejsza rozmiar wynikowej paczki.
 build-options:
   env:
     - BASEAPP_REMOVE_WEBENGINE=1
@@ -20,12 +14,8 @@ build-options:
 
 finish-args:
   - --share=ipc
-  # fallback-x11 zamiast samego x11: pozwala uruchomić się też pod czystym
-  # Waylandem bez XWaylanda, jeśli akurat nie jest dostępny
   - --socket=fallback-x11
   - --socket=wayland
-  # GhostPoster czyta i zapisuje PDF-y wskazane przez użytkownika —
-  # potrzebuje dostępu do katalogu domowego, nie do całego systemu plików
   - --filesystem=home
   - --device=dri
 
@@ -33,64 +23,26 @@ cleanup-commands:
   - /app/cleanup-BaseApp.sh
 
 modules:
-  # Zależności czysto-pythonowe (PyMuPDF, pypdf, reportlab, click, rich,
-  # Pillow + ich własne zależności) — wygenerowane narzędziem
-  # flatpak-pip-generator z prawdziwymi hashami z PyPI, żeby build był
-  # odtwarzalny i offline. PySide6 CELOWO pominięte: dostarcza je już
-  # io.qt.PySide.BaseApp (patrz `base:` powyżej) — próba doinstalowania go
-  # przez pip zdublowałaby Qt i znacząco spuchła paczkę.
   - pip-dependencies.yaml
 
   - name: ghostposter
     buildsystem: simple
+
     build-commands:
       - pip3 install --no-build-isolation --prefix=/app .
-      - install -Dm644 flatpak/io.github.nftomczain.GhostPoster.desktop
-        /app/share/applications/io.github.nftomczain.GhostPoster.desktop
-      - install -Dm644 flatpak/io.github.nftomczain.GhostPoster.metainfo.xml
-        /app/share/metainfo/io.github.nftomczain.GhostPoster.metainfo.xml
-      - install -Dm644 docs/logo.png
+      - install -Dm644 flatpak/io.github.nftomczain.GhostPoster.desktop /app/share/applications/io.github.nftomczain.GhostPoster.desktop
+      - install -Dm644 flatpak/io.github.nftomczain.GhostPoster.metainfo.xml /app/share/metainfo/io.github.nftomczain.GhostPoster.metainfo.xml
 
+      - install -Dm644 docs/icon-16.png /app/share/icons/hicolor/16x16/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-24.png /app/share/icons/hicolor/24x24/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-32.png /app/share/icons/hicolor/32x32/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-48.png /app/share/icons/hicolor/48x48/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-64.png /app/share/icons/hicolor/64x64/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-96.png /app/share/icons/hicolor/96x96/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-128.png /app/share/icons/hicolor/128x128/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-256.png /app/share/icons/hicolor/256x256/apps/io.github.nftomczain.GhostPoster.png
+      - install -Dm644 docs/icon-512.png /app/share/icons/hicolor/512x512/apps/io.github.nftomczain.GhostPoster.png
 
-  - pip-dependencies.yaml
-
-  - name: ghostposter
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-build-isolation --prefix=/app .
-      - install -Dm644 flatpak/io.github.nftomczain.GhostPoster.desktop \
-          /app/share/applications/io.github.nftomczain.GhostPoster.desktop
-      - install -Dm644 flatpak/io.github.nftomczain.GhostPoster.metainfo.xml \
-          /app/share/metainfo/io.github.nftomczain.GhostPoster.metainfo.xml
-      - install -Dm644 docs/icon-16.png \
-          /app/share/icons/hicolor/16x16/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-24.png \
-          /app/share/icons/hicolor/24x24/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-32.png \
-          /app/share/icons/hicolor/32x32/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-48.png \
-          /app/share/icons/hicolor/48x48/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-64.png \
-          /app/share/icons/hicolor/64x64/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-96.png \
-          /app/share/icons/hicolor/96x96/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-128.png \
-          /app/share/icons/hicolor/128x128/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-256.png \
-          /app/share/icons/hicolor/256x256/apps/io.github.nftomczain.GhostPoster.png
-      - install -Dm644 docs/icon-512.png \
-          /app/share/icons/hicolor/512x512/apps/io.github.nftomczain.GhostPoster.png
-  sources:
-  - type: dir
-    path: ..
-    skip:
-    - .git
-    - build
-    - dist
-    - AppDir
-    - "\*.AppImage"
-    - .pytest_cache
-    - "\*\*/**pycache**"        /app/share/icons/hicolor/256x256/apps/io.github.nftomczain.GhostPoster.png
     sources:
       - type: dir
         path: ..
